@@ -1,0 +1,35 @@
+.product-lists-container {
+  padding: 24px;
+}
+
+.product-table {
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.05);
+  border-radius: 12px;
+  overflow: hidden;
+}
+
+.product-image {
+  object-fit: cover;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+}
+
+.product-title {
+  font-size: 16px;
+}
+
+.product-brand {
+  font-size: 14px;
+  padding: 4px 8px;
+}
+
+.product-price {
+  color: #52c41a;
+  font-weight: bold;
+}
+
+.product-availability,
+.product-stock {
+  color: black;
+  font-weight: bold;
+}

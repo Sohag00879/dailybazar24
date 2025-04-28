@@ -1,15 +1,13 @@
-
-
 import { Button, Image, Space, Table, Tag, Typography } from 'antd';
 import { Link } from 'react-router-dom';
 import { useAllProductsQuery } from "../../redux/features/products/getAllProductsApi";
+import '../../styles/ProductLists.css';
 
-const { Text } = Typography;
 
 const ProductLists = () => {
     const { data, isLoading } = useAllProductsQuery(undefined);
-    console.log(data)
-
+    console.log(data);
+    const { Text } = Typography
     const columns = [
         {
             title: 'Image',
@@ -22,18 +20,17 @@ const ProductLists = () => {
                         alt="product"
                         width={80}
                         height={80}
-                        style={{ objectFit: 'cover', borderRadius: '8px', boxShadow: '0 2px 8px rgba(0,0,0,0.15)' }}
+                        className="product-image"
                     />
                 );
-            }
-
+            },
         },
         {
             title: 'Title',
             dataIndex: 'title',
             key: 'title',
             render: (title) => (
-                <Text strong style={{ fontSize: '16px' }}>{title}</Text>
+                <Text strong className="product-title">{title}</Text>
             ),
         },
         {
@@ -41,7 +38,7 @@ const ProductLists = () => {
             dataIndex: 'brand',
             key: 'brand',
             render: (brand) => (
-                <Tag color="blue" style={{ fontSize: '14px', padding: '4px 8px' }}>
+                <Tag className="product-brand" color="blue">
                     {brand}
                 </Tag>
             ),
@@ -51,7 +48,7 @@ const ProductLists = () => {
             dataIndex: 'price',
             key: 'price',
             render: (price) => (
-                <Text style={{ color: '#52c41a', fontWeight: 'bold' }}>${price}</Text>
+                <Text className="product-price">${price}</Text>
             ),
         },
         {
@@ -59,7 +56,7 @@ const ProductLists = () => {
             dataIndex: 'availabilityStatus',
             key: 'availability',
             render: (availability) => (
-                <Text style={{ color: 'black', fontWeight: 'bold' }}>{availability}</Text>
+                <Text className="product-availability">{availability}</Text>
             ),
         },
         {
@@ -67,7 +64,7 @@ const ProductLists = () => {
             dataIndex: 'stock',
             key: 'stock',
             render: (stock) => (
-                <Text style={{ color: 'black', fontWeight: 'bold' }}>{stock}</Text>
+                <Text className="product-stock">{stock}</Text>
             ),
         },
         {
@@ -75,7 +72,9 @@ const ProductLists = () => {
             key: 'actions',
             render: (_, record) => (
                 <Space>
-                    <Link to={`${record.id}`}><Button type="primary" size="small">View</Button></Link>
+                    <Link to={`${record.id}`}>
+                        <Button type="primary" size="small">View</Button>
+                    </Link>
                     <Button type="default" size="small">Edit</Button>
                 </Space>
             ),
@@ -83,7 +82,7 @@ const ProductLists = () => {
     ];
 
     return (
-        <div style={{ padding: '24px' }}>
+        <div className="product-lists-container">
             <Table
                 columns={columns}
                 dataSource={data?.products}
@@ -91,11 +90,7 @@ const ProductLists = () => {
                 bordered
                 loading={isLoading}
                 pagination={{ pageSize: 8 }}
-                style={{
-                    boxShadow: '0 8px 24px rgba(0,0,0,0.05)',
-                    borderRadius: '12px',
-                    overflow: 'hidden',
-                }}
+                className="product-table"
             />
         </div>
     );
