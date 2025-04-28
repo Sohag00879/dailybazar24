@@ -1,0 +1,132 @@
+.product-info {
+  padding-bottom: 24px;
+}
+
+.product-info-tags {
+  margin-bottom: 16px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.tag-brand {
+  background-color: #f5f0ff;
+  border-color: #d3adf7;
+}
+
+.tag-category {
+  background-color: #e6f7ff;
+  border-color: #91d5ff;
+}
+
+.tag-item {
+  background-color: #fafafa;
+  border-color: #d9d9d9;
+}
+
+.product-info-title {
+  margin-bottom: 8px;
+}
+
+.product-info-rating {
+  display: flex;
+  align-items: center;
+  margin-bottom: 16px;
+}
+
+.rating-stars {
+  font-size: 20px;
+}
+
+.rating-value {
+  margin-left: 8px;
+}
+
+.rating-count {
+  margin-left: 8px;
+}
+
+.product-info-price {
+  display: flex;
+  align-items: center;
+  margin-bottom: 24px;
+}
+
+.current-price {
+  font-size: 24px;
+  color: #52c41a;
+}
+
+.discount-tag {
+  margin-left: 8px;
+  background-color: #fff1f0;
+  border-color: #ffa39e;
+  color: #cf1322;
+}
+
+.product-info-stock {
+  margin-bottom: 24px;
+}
+
+.sku-tag,
+.moq-tag {
+  margin-left: 8px;
+}
+
+.product-info-description {
+  margin-bottom: 24px;
+}
+
+.product-info-actions {
+  margin-bottom: 24px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  justify-content: center;
+}
+
+.product-info-extra {
+  background: #f6f6f6;
+  padding: 12px;
+  border-radius: 4px;
+}
+
+.extra-item {
+  align-items: center;
+}
+
+.extra-icon {
+  font-size: 20px;
+  margin-right: 8px;
+}
+
+/* Responsive Breakpoints */
+@media (max-width: 576px) {
+  .product-info-price {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .prouct-info-stock-items {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .current-price {
+    font-size: 20px;
+  }
+
+  .rating-stars {
+    font-size: 16px;
+  }
+}
+
+@media (max-width: 768px) {
+  .product-info {
+    padding-bottom: 16px;
+  }
+
+  .product-info-title {
+    font-size: 24px;
+  }
+}

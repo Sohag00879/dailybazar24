@@ -1,35 +1,37 @@
 import { BarcodeOutlined } from '@ant-design/icons';
 import { Badge, Button, Col, Image } from 'antd';
-import { IProduct } from '../../../types/ProductTypes';
 
-const ProductGallery = ({ product }: { product: IProduct }) => {
-    const mainImage = product?.images[0] ?? 'https://via.placeholder.com/600x600?text=Product+Image';
-    const qrCode = product?.meta?.qrCode;
+const ProductGallery = ({ product }) => {
+    const mainImage = product?.images?.[0] || 'https://via.placeholder.com/600x600?text=Product+Image';
+    const qrCode = product?.meta?.qrCode || '#';
+    console.log(product)
 
     return (
         <Col xs={24} md={10}>
             <Badge.Ribbon
-                text={product?.availabilityStatus}
+                text={product?.availabilityStatus || 'Loading...'}
                 color={product?.stock < 10 ? 'red' : 'orange'}
                 placement="start"
             >
-                <div className="product-gallery-image-wrapper">
+                <div style={{ marginBottom: '16px' }}>
                     <Image
                         width="100%"
                         src={mainImage}
-                        preview={{ src: mainImage }}
+                        preview={{
+                            src: mainImage
+                        }}
                         fallback="https://via.placeholder.com/600x600?text=Product+Image"
-                        alt={product?.title}
+                        alt={product?.title || 'Product image'}
                     />
                 </div>
             </Badge.Ribbon>
 
-            <div className="product-gallery-qr-button">
+            <div style={{ textAlign: 'center', marginTop: '16px' }}>
                 <Button
                     type="link"
                     icon={<BarcodeOutlined />}
                     onClick={() => window.open(qrCode, '_blank')}
-                    disabled={!qrCode}
+                    disabled={!product?.meta?.qrCode}
                 >
                     View QR Code
                 </Button>
