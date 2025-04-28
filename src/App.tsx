@@ -1,9 +1,10 @@
+import { Outlet } from "react-router-dom"
 
 function App() {
 
   return (
     <div style={{ paddingLeft: '5%', paddingRight: '5%' }}>
-      <h1>Welcom to DailyBaazar</h1>
+      <Outlet />
     </div>
   )
 }
