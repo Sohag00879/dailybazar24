@@ -1,15 +1,47 @@
-import { Button, Modal, Space, Statistic } from "antd";
+import { Button, Input, Modal, Rate, Space, Statistic } from "antd";
+import TextArea from "antd/es/input/TextArea";
 import Title from "antd/es/skeleton/Title";
 import { useState } from 'react';
+import { useAddReviewMutation } from "../../redux/features/reviews/addReviewApi";
 
-const ReviewSummary = ({ reviews, rating }) => {
+
+const ReviewSummary = ({ reviews, rating, product }) => {
     const [isModalOpen, setIsModalOpen] = useState(false);
+    const [newRating, setNewRating] = useState<number>(0);
+    const [newComment, setNewComment] = useState<string>('');
+    const [name, setName] = useState<string>('')
+    const [email, setEmail] = useState<string>('')
+    const [addReview] = useAddReviewMutation();
+
+    const handleSubmit = async () => {
+        if (!newComment || newRating === 0) return;
+        const review: Partial<IReview> = {
+            rating: newRating,
+            comment: newComment,
+            reviewerName: name,
+            reviewerEmail: email
+        };
+        const updateData = {
+            review,
+            id: product.id,
+            product
+        }
+
+        try {
+            const res = await addReview(updateData)
+            console.log(res)
+        } catch (err) {
+            console.log(err)
+        }
+
+    };
 
     const showModal = () => {
         setIsModalOpen(true);
     };
 
     const handleOk = () => {
+        handleSubmit()
         setIsModalOpen(false);
     };
 
@@ -35,12 +67,23 @@ const ReviewSummary = ({ reviews, rating }) => {
                 <Button type="primary" onClick={showModal}>Write a Review</Button>
             </div>
 
-            <Modal title="Basic Modal" open={isModalOpen} onOk={handleOk} onCancel={handleCancel}>
-                <p>Some contents...</p>
-                <p>Some contents...</p>
-                <p>Some contents...</p>
-            </Modal>
+            <Modal title="Add a Review" open={isModalOpen} onOk={handleOk} onCancel={handleCancel}>
+                <Rate
+                    value={newRating}
+                    onChange={(value) => setNewRating(value)}
+                />
+                <Input placeholder="Your Name" style={{ marginTop: '10px' }} onChange={(e) => setName(e.target.value)} />
+                <Input placeholder="Your Email" style={{ marginTop: '10px' }} onChange={(e) => setEmail(e.target.value)} />
 
+                <TextArea
+                    rows={4}
+                    value={newComment}
+                    onChange={(e) => setNewComment(e.target.value)}
+                    placeholder="Write your review..."
+                    style={{ marginTop: '10px' }}
+                />
+
+            </Modal>
         </div>
     )
 }

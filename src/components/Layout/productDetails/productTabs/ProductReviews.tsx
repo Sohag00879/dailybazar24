@@ -8,7 +8,7 @@ const ProductReviews = ({ product }: { product: IProduct }) => {
     return (
 
         <div style={{ padding: '16px' }}>
-            <ReviewSummary rating={product.rating} reviews={product.reviews} />
+            <ReviewSummary rating={product.rating} reviews={product.reviews} product={product} />
             <ReviewSection reviews={product?.reviews} />
 
         </div>

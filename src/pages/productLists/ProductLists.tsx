@@ -1,12 +1,14 @@
 import { Button, Image, Space, Table, Tag, Typography } from 'antd';
 import { Link } from 'react-router-dom';
+import { useAllCategoriesQuery } from '../../redux/features/categories/getAllCategoriesApi';
 import { useAllProductsQuery } from "../../redux/features/products/getAllProductsApi";
 import '../../styles/ProductLists.css';
 
 
 const ProductLists = () => {
     const { data, isLoading } = useAllProductsQuery(undefined);
-    console.log(data);
+    const { data: categories } = useAllCategoriesQuery(undefined)
+    console.log(categories)
     const { Text } = Typography
     const columns = [
         {
@@ -72,10 +74,12 @@ const ProductLists = () => {
             key: 'actions',
             render: (_, record) => (
                 <Space>
-                    <Link to={`${record.id}`}>
+                    <Link to={`products/${record.id}`}>
                         <Button type="primary" size="small">View</Button>
                     </Link>
-                    <Button type="default" size="small">Edit</Button>
+                    <Link to={`products/edit/${record.id}`}>
+                        <Button type="default" size="small">Edit</Button>
+                    </Link>
                 </Space>
             ),
         },
