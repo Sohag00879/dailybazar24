@@ -1,5 +1,4 @@
-
-import { IProduct } from "../../../types/ProductTypes";
+import { IProduct } from '../../../../types/ProductTypes';
 import ReviewSection from "../../../UI/ReviewSection";
 import ReviewSummary from "../../../UI/ReviewSummary";
 

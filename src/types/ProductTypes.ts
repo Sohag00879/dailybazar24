@@ -37,9 +37,9 @@ export interface IProduct {
   category: string;
   brand: string;
   thumbnail: string;
-  images: string[];
+  images: any[];
   tags: string[];
-  dimensions: Dimensions;
-  meta: Meta;
-  reviews: Review[];
+  dimensions: IDimensions;
+  meta: IMeta;
+  reviews: IReview[];
 }

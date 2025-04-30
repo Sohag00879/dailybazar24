@@ -1,11 +1,22 @@
-import { Button, Input, Modal, Rate, Space, Statistic } from "antd";
+import { Button, Input, Modal, Rate, Space, Statistic, Typography } from "antd";
 import TextArea from "antd/es/input/TextArea";
-import Title from "antd/es/skeleton/Title";
 import { useState } from 'react';
 import { useAddReviewMutation } from "../../redux/features/reviews/addReviewApi";
+import { IProduct } from "../../types/ProductTypes";
+const { Title } = Typography;
 
 
-const ReviewSummary = ({ reviews, rating, product }) => {
+interface Review {
+    comment: string;
+    date?: string | Date;
+    rating: number;
+    reviewerName: string;
+    reviewerEmail: string;
+}
+
+type Reviews = Review[];
+
+const ReviewSummary = ({ reviews, rating, product }: { reviews: Reviews, rating: number, product: IProduct }) => {
     const [isModalOpen, setIsModalOpen] = useState(false);
     const [newRating, setNewRating] = useState<number>(0);
     const [newComment, setNewComment] = useState<string>('');
@@ -15,7 +26,7 @@ const ReviewSummary = ({ reviews, rating, product }) => {
 
     const handleSubmit = async () => {
         if (!newComment || newRating === 0) return;
-        const review: Partial<IReview> = {
+        const review = {
             rating: newRating,
             comment: newComment,
             reviewerName: name,
@@ -50,7 +61,7 @@ const ReviewSummary = ({ reviews, rating, product }) => {
     };
     return (
         <div style={{ textAlign: 'center', marginBottom: '24px' }}>
-            <Title level={3}>Customer Reviews</Title>
+            <Title>Customer Reviews</Title>
             <Space size="large">
                 <Statistic
                     title="Average Rating"

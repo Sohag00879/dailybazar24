@@ -1,5 +1,5 @@
 import { Descriptions } from 'antd';
-import { IProduct } from '../../../types/ProductTypes';
+import { IProduct } from '../../../../types/ProductTypes';
 
 const Specification = ({ product }: { product: IProduct }) => {
     return (

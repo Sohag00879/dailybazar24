@@ -12,11 +12,8 @@ import { useSingleProductQuery } from '../../redux/features/products/getSinglePr
 const { TabPane } = Tabs;
 
 
-interface ProductDetailsParams {
-    productId: string;
-}
 const ProductDetails = () => {
-    const { productId } = useParams<ProductDetailsParams>();
+    const { productId } = useParams();
     const { data: product, isLoading, isError } = useSingleProductQuery(productId);
     const navigate = useNavigate();
 

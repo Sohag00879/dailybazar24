@@ -7,8 +7,8 @@ const addReviewApi = baseApi.injectEndpoints({
         url: `/${updateData.id}`,
         method: "PATCH",
         body: {
-          ...product,
-          reviews: [...reviews, newReview],
+          ...updateData.product,
+          reviews: [...updateData.product.reviews, updateData.review],
         },
       }),
       invalidatesTags: ["reviews"],

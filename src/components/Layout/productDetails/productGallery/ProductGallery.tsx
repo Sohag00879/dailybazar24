@@ -1,7 +1,8 @@
 import { BarcodeOutlined } from '@ant-design/icons';
 import { Badge, Button, Col, Image } from 'antd';
+import { IProduct } from '../../../../types/ProductTypes';
 
-const ProductGallery = ({ product }) => {
+const ProductGallery = ({ product }: { product: IProduct }) => {
     const mainImage = product?.thumbnail || product?.images?.[0];
     const qrCode = product?.meta?.qrCode || '#';
     return (

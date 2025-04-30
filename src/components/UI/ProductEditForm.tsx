@@ -1,16 +1,19 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { MinusCircleOutlined, PlusOutlined, UploadOutlined } from '@ant-design/icons';
 import { Button, Card, Form, Input, InputNumber, Select, Space, Upload } from 'antd';
 import { useEffect } from 'react';
 import { useEditProductMutation } from '../../redux/features/products/editProductApi';
 import '../../styles/ProductEditForm.css';
+import { IProduct } from '../../types//ProductTypes';
 import { ICategory } from '../../types/CategoriesTypes';
-import { IProduct } from '../../types/ProductTypes';
+
 
 const { TextArea } = Input;
 
-const ProductEditForm = ({ productData, categoriesData }: { productData: IProduct, categoriesData: ICategory }) => {
+const ProductEditForm = ({ productData, categoriesData }: { productData: IProduct, categoriesData: ICategory[] }) => {
     const [form] = Form.useForm();
     const [editProduct] = useEditProductMutation()
+    console.log(categoriesData)
 
     useEffect(() => {
         if (productData) {
@@ -20,13 +23,15 @@ const ProductEditForm = ({ productData, categoriesData }: { productData: IProduc
 
     const handleFinish = async (values: IProduct) => {
         try {
-            const tagsArray = Array.isArray(values.tags)
+            const tagsArray: string[] = Array.isArray(values.tags)
                 ? values.tags
-                : values.tags?.split(',').map((tag: string) => tag.trim()) || [];
+                : (values.tags as any)?.split(',').map((tag: string) => tag.trim()) || [];
 
 
-            const imageFile = values.image?.[0]?.originFileObj;
-            const imageUrl = imageFile ? imageFile.name : productData.image;
+
+
+            const imageFile = values?.images?.[0]?.originFileObj;
+            const imageUrl = imageFile ? imageFile?.name : productData?.images;
 
             const updateData = {
                 ...values,
@@ -71,10 +76,19 @@ const ProductEditForm = ({ productData, categoriesData }: { productData: IProduc
                             <Input />
                         </Form.Item>
 
-                        <Form.Item name="category" label="Category" rules={[{ required: true, message: 'Category is required' }]}>
-                            <Select>
-                                {categoriesData?.map(cat => (
-                                    <Select.Option key={cat._id} value={cat.name}>
+                        <Form.Item
+                            name="category"
+                            label="Category"
+                            rules={[{ required: true, message: 'Category is required' }]}
+                        >
+                            <Select
+                                placeholder="Select a category"
+                            >
+                                {categoriesData?.map((cat: ICategory) => (
+                                    <Select.Option
+                                        key={cat?.name}
+                                        value={cat.name}
+                                    >
                                         {cat.name}
                                     </Select.Option>
                                 ))}
@@ -177,7 +191,7 @@ const ProductEditForm = ({ productData, categoriesData }: { productData: IProduc
                                     </Space>
                                 ))}
                                 <Form.Item>
-                                    <Button type="secondary" onClick={() => add()} icon={<PlusOutlined />} className="add-button">
+                                    <Button type="default" onClick={() => add()} icon={<PlusOutlined />} className="add-button">
                                         Add Review
                                     </Button>
                                 </Form.Item>

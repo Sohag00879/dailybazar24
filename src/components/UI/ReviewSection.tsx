@@ -2,15 +2,25 @@ import { Avatar, List, Rate, Space, Typography } from "antd";
 import { format } from 'date-fns';
 const { Text } = Typography;
 
-const ReviewSection = ({ reviews }) => {
+interface Review {
+    comment: string;
+    date: string | Date;
+    rating: number;
+    reviewerName: string;
+    reviewerEmail: string;
+}
+
+type Reviews = Review[];
+
+const ReviewSection = ({ reviews }: { reviews: Reviews }) => {
     return (
         <List
             itemLayout="horizontal"
             dataSource={reviews}
-            renderItem={item => (
+            renderItem={(item: Review) => (
                 <List.Item>
                     <List.Item.Meta
-                        avatar={<Avatar src={`https://joesch.moe/api/v1/random?key=${item.id}`} />}
+                        avatar={<Avatar src={`https://joesch.moe/api/v1/random?key`} />}
                         title={
                             <Space direction="vertical" size={0} style={{ display: 'flex', marginBottom: 16 }}>
                                 <Space size="middle" align="baseline">
