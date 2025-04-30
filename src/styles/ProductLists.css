@@ -1,5 +1,27 @@
 .product-lists-container {
-  padding: 24px;
+  padding: 0 24px;
+}
+
+.product-list-title {
+  text-align: center;
+  margin: 32px 0;
+  color: #2f54eb;
+  font-weight: 500;
+  letter-spacing: 1px;
+  position: relative;
+  padding-bottom: 16px;
+  font-size: 28px;
+}
+
+.product-list-title::before {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 120px;
+  height: 2px;
+  background: linear-gradient(90deg, transparent, #2f54eb, transparent);
 }
 
 .product-table {
@@ -32,4 +54,39 @@
 .product-stock {
   color: black;
   font-weight: bold;
+}
+
+@media (max-width: 768px) {
+  .product-table .ant-table-thead > tr > th,
+  .product-table .ant-table-tbody > tr > td {
+    padding: 8px !important;
+  }
+
+  .product-image {
+    width: 60px !important;
+    height: 60px !important;
+  }
+
+  .product-list-title {
+    font-size: 1.5rem !important;
+    text-align: center;
+  }
+}
+
+/* Small devices (landscape phones) */
+@media (max-width: 576px) {
+  .product-table .ant-table-thead > tr > th,
+  .product-table .ant-table-tbody > tr > td {
+    padding: 6px !important;
+    font-size: 0.8rem;
+  }
+
+  .ant-btn-sm {
+    padding: 0 6px !important;
+    font-size: 0.75rem !important;
+  }
+
+  .product-brand {
+    font-size: 0.75rem !important;
+  }
 }

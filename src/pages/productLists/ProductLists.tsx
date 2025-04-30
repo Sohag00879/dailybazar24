@@ -1,100 +1,46 @@
-import { Button, Image, Space, Table, Tag, Typography } from 'antd';
-import { Link } from 'react-router-dom';
-import { useAllCategoriesQuery } from '../../redux/features/categories/getAllCategoriesApi';
+import { Table, Typography } from 'antd';
+import { useState } from 'react';
 import { useAllProductsQuery } from "../../redux/features/products/getAllProductsApi";
 import '../../styles/ProductLists.css';
-
+import { columns } from '../../utils/TableColumns';
 
 const ProductLists = () => {
-    const { data, isLoading } = useAllProductsQuery(undefined);
-    const { data: categories } = useAllCategoriesQuery(undefined)
-    console.log(categories)
-    const { Text } = Typography
-    const columns = [
-        {
-            title: 'Image',
-            dataIndex: 'images',
-            key: 'images',
-            render: (images) => {
-                return (
-                    <Image
-                        src={images[0]}
-                        alt="product"
-                        width={80}
-                        height={80}
-                        className="product-image"
-                    />
-                );
-            },
-        },
-        {
-            title: 'Title',
-            dataIndex: 'title',
-            key: 'title',
-            render: (title) => (
-                <Text strong className="product-title">{title}</Text>
-            ),
-        },
-        {
-            title: 'Brand',
-            dataIndex: 'brand',
-            key: 'brand',
-            render: (brand) => (
-                <Tag className="product-brand" color="blue">
-                    {brand}
-                </Tag>
-            ),
-        },
-        {
-            title: 'Price',
-            dataIndex: 'price',
-            key: 'price',
-            render: (price) => (
-                <Text className="product-price">${price}</Text>
-            ),
-        },
-        {
-            title: 'Availability',
-            dataIndex: 'availabilityStatus',
-            key: 'availability',
-            render: (availability) => (
-                <Text className="product-availability">{availability}</Text>
-            ),
-        },
-        {
-            title: 'Stock',
-            dataIndex: 'stock',
-            key: 'stock',
-            render: (stock) => (
-                <Text className="product-stock">{stock}</Text>
-            ),
-        },
-        {
-            title: 'Actions',
-            key: 'actions',
-            render: (_, record) => (
-                <Space>
-                    <Link to={`products/${record.id}`}>
-                        <Button type="primary" size="small">View</Button>
-                    </Link>
-                    <Link to={`products/edit/${record.id}`}>
-                        <Button type="default" size="small">Edit</Button>
-                    </Link>
-                </Space>
-            ),
-        },
-    ];
+    const [pagination, setPagination] = useState({
+        current: 1,
+        pageSize: 8,
+        total: 0,
+    });
+    const { data, isLoading } = useAllProductsQuery({
+        limit: pagination.pageSize,
+        skip: (pagination.current - 1) * pagination.pageSize,
+    });
+
+    const handleTableChange = (pagination) => {
+        setPagination({
+            ...pagination,
+            current: pagination.current,
+        });
+    };
 
     return (
         <div className="product-lists-container">
+            <Typography.Title level={2} className="product-list-title">Products</Typography.Title>
             <Table
                 columns={columns}
                 dataSource={data?.products}
                 rowKey={(record) => record.id}
                 bordered
                 loading={isLoading}
-                pagination={{ pageSize: 8 }}
+                pagination={{
+                    ...pagination,
+                    total: data?.products?.total || 0,
+                    showSizeChanger: true,
+                    responsive: true,
+                }}
+                onChange={handleTableChange}
                 className="product-table"
+                scroll={{ x: true }}
+                size="middle"
             />
         </div>
     );

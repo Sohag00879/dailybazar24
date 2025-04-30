@@ -1,14 +1,11 @@
 import {
     CheckCircleOutlined,
     ClockCircleOutlined,
-    HeartOutlined,
     SafetyCertificateOutlined,
-    ShareAltOutlined,
-    ShoppingCartOutlined,
     StockOutlined,
-    TagOutlined,
+    TagOutlined
 } from '@ant-design/icons';
-import { Button, Col, Divider, Rate, Space, Tag, Typography } from 'antd';
+import { Col, Divider, Rate, Space, Tag, Typography } from 'antd';
 import React from 'react';
 import '../../../../styles/ProductInfo.css';
 import { IProduct } from '../../../../types/ProductTypes';
@@ -47,13 +44,39 @@ const ProductInfo: React.FC<ProductInfoProps> = ({ product }) => {
             </div>
 
             <div className="product-info-price">
-                <Text strong className="current-price">
-                    ${product.price}
-                </Text>
-                {product.discountPercentage > 0 && (
-                    <Tag className="discount-tag">-{product.discountPercentage}%</Tag>
+                {product.discountPercentage > 0 ? (
+                    <>
+                        <Text
+                            strong
+                            delete
+                            className="original-price"
+                            style={{ color: '#999', fontSize: '16px' }}
+                        >
+                            ${product.price.toFixed(2)}
+                        </Text>
+                        <Text
+                            strong
+                            className="discounted-price"
+                            style={{ marginLeft: '8px', color: '#f5222d', fontSize: '18px' }}
+                        >
+                            ${(
+                                product.price -
+                                (product.price * product.discountPercentage) / 100
+                            ).toFixed(2)}
+                        </Text>
+                    </>
+                ) : (
+                    <Text
+                        strong
+                        className="current-price"
+                        style={{ color: '#000', fontSize: '18px' }}
+                    >
+                        ${product.price.toFixed(2)}
+                    </Text>
                 )}
             </div>
+
+
 
             <div className="product-info-stock">
                 <Space size="middle" className='prouct-info-stock-items'>
@@ -79,23 +102,6 @@ const ProductInfo: React.FC<ProductInfoProps> = ({ product }) => {
             </div>
 
             <Divider />
-
-            <Space size="middle" className="product-info-actions">
-                <Button
-                    type="primary"
-                    size="large"
-                    icon={<ShoppingCartOutlined />}
-                    disabled={product.stock === 0}
-                >
-                    Add to Cart
-                </Button>
-                <Button size="large" icon={<HeartOutlined />}>
-                    Wishlist
-                </Button>
-                <Button size="large" icon={<ShareAltOutlined />}>
-                    Share
-                </Button>
-            </Space>
 
             <div className="product-info-extra">
                 <Space direction="vertical" size="small">

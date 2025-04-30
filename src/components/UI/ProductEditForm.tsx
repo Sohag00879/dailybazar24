@@ -1,6 +1,7 @@
 import { MinusCircleOutlined, PlusOutlined, UploadOutlined } from '@ant-design/icons';
 import { Button, Card, Form, Input, InputNumber, Select, Space, Upload } from 'antd';
 import { useEffect } from 'react';
+import { useEditProductMutation } from '../../redux/features/products/editProductApi';
 import '../../styles/ProductEditForm.css';
 import { ICategory } from '../../types/CategoriesTypes';
 import { IProduct } from '../../types/ProductTypes';
@@ -8,8 +9,8 @@ import { IProduct } from '../../types/ProductTypes';
 const { TextArea } = Input;
 
 const ProductEditForm = ({ productData, categoriesData }: { productData: IProduct, categoriesData: ICategory }) => {
-    console.log(categoriesData)
     const [form] = Form.useForm();
+    const [editProduct] = useEditProductMutation()
 
     useEffect(() => {
         if (productData) {
@@ -17,9 +18,37 @@ const ProductEditForm = ({ productData, categoriesData }: { productData: IProduc
         }
     }, [productData]);
 
-    const handleFinish = (values) => {
-        console.log(values)
-    }
+    const handleFinish = async (values: IProduct) => {
+        try {
+            const tagsArray = Array.isArray(values.tags)
+                ? values.tags
+                : values.tags?.split(',').map((tag: string) => tag.trim()) || [];
+
+
+            const imageFile = values.image?.[0]?.originFileObj;
+            const imageUrl = imageFile ? imageFile.name : productData.image;
+
+            const updateData = {
+                ...values,
+                tags: tagsArray,
+                image: imageUrl,
+            };
+
+            //output the updated data
+            console.log(updateData)
+
+            const res = await editProduct({
+                id: productData.id,
+                data: updateData,
+            }).unwrap();
+
+            console.log(res);
+        } catch (err) {
+            console.error('Error updating product:', err);
+        }
+    };
+
+
 
     return (
         <div className="container">
@@ -150,7 +179,7 @@ const ProductEditForm = ({ productData, categoriesData }: { productData: IProduc
                                     </Space>
                                 ))}
                                 <Form.Item>
-                                    <Button type="dashed" onClick={() => add()} icon={<PlusOutlined />} className="add-button">
+                                    <Button type="secondary" onClick={() => add()} icon={<PlusOutlined />} className="add-button">
                                         Add Review
                                     </Button>
                                 </Form.Item>
@@ -160,7 +189,7 @@ const ProductEditForm = ({ productData, categoriesData }: { productData: IProduc
 
                     <div className="submit-section">
                         <Button type="primary" htmlType="submit" className="submit-button">
-                            Save Changes
+                            Submit
                         </Button>
                     </div>
                 </Form>

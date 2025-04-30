@@ -4,8 +4,6 @@ import { Badge, Button, Col, Image } from 'antd';
 const ProductGallery = ({ product }) => {
     const mainImage = product?.images?.[0] || 'https://via.placeholder.com/600x600?text=Product+Image';
     const qrCode = product?.meta?.qrCode || '#';
-    console.log(product)
-
     return (
         <Col xs={24} md={10}>
             <Badge.Ribbon

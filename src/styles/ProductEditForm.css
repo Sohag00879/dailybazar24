@@ -116,15 +116,34 @@ textarea {
 
 .submit-section {
   display: flex;
-  justify-content: flex-end;
+  justify-content: center;
   margin-top: 20px;
 }
 
 .submit-button {
   background-color: #1890ff;
   color: white;
-  width: 200px;
+  padding: 20px 60px; /* increased vertical and horizontal padding */
   font-size: 16px;
+  font-weight: 500;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  line-height: 1.5;
+  min-width: 140px;
+}
+
+/* Hover & Focus States */
+.submit-button:hover {
+  background-color: #40a9ff;
+  transform: translateY(-1px);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
 }
 
 .submit-button:hover {

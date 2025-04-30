@@ -6,6 +6,8 @@ import ProductInfo from '../../components/Layout/productDetails/productInfo/Prod
 import ProductDescription from '../../components/Layout/productDetails/productTabs/ProductDescription';
 import ProductReviews from '../../components/Layout/productDetails/productTabs/ProductReviews';
 import Specification from '../../components/Layout/productDetails/productTabs/Specification';
+import Loader from '../../components/UI/Loader';
+import ProductNotFound from '../../components/UI/ProductNotFound';
 import { useSingleProductQuery } from '../../redux/features/products/getSingleProductApi';
 const { TabPane } = Tabs;
 
@@ -18,15 +20,12 @@ const ProductDetails = () => {
     const { data: product, isLoading, isError } = useSingleProductQuery(productId);
     console.log(product)
     const navigate = useNavigate();
-    if (!productId) {
-        return <h1>Invalid product ID!</h1>;
-    }
 
     if (isLoading) {
-        return <p>Loading product…</p>;
+        return <Loader />;
     }
     if (isError || !product) {
-        return <h1>No Product Found!</h1>;
+        return <ProductNotFound />
     }
 
     return (
@@ -37,11 +36,15 @@ const ProductDetails = () => {
             <Button
                 type="text"
                 icon={<ArrowLeftOutlined />}
-                style={{ marginBottom: '16px' }}
+                style={{
+                    marginBottom: '16px',
+                    fontSize: '17px',
+                }}
                 onClick={() => navigate(-1)}
             >
                 Back to Products
             </Button>
+
 
             <Card bordered={false}>
                 <Row gutter={[32, 32]}>

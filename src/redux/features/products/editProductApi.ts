@@ -3,13 +3,14 @@ import { baseApi } from "../../api/baseApi";
 const editProductApi = baseApi.injectEndpoints({
   endpoints: (builder) => ({
     editProduct: builder.mutation({
-      query: (editInfo) => ({
-        url: `/edit-donation/${editInfo.id}`,
+      query: ({ id, data }) => ({
+        url: `/${id}`,
         method: "PATCH",
-        body: editInfo.donationData,
+        body: data,
       }),
-      invalidatesTags: ["donations"],
+      invalidatesTags: ["products"],
     }),
   }),
 });
+
 export const { useEditProductMutation } = editProductApi;
