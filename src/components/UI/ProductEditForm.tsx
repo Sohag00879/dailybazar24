@@ -13,7 +13,6 @@ const { TextArea } = Input;
 const ProductEditForm = ({ productData, categoriesData }: { productData: IProduct, categoriesData: ICategory[] }) => {
     const [form] = Form.useForm();
     const [editProduct] = useEditProductMutation()
-    console.log(categoriesData)
 
     useEffect(() => {
         if (productData) {
@@ -26,8 +25,6 @@ const ProductEditForm = ({ productData, categoriesData }: { productData: IProduc
             const tagsArray: string[] = Array.isArray(values.tags)
                 ? values.tags
                 : (values.tags as any)?.split(',').map((tag: string) => tag.trim()) || [];
-
-
 
 
             const imageFile = values?.images?.[0]?.originFileObj;
