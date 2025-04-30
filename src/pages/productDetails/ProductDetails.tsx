@@ -18,7 +18,6 @@ interface ProductDetailsParams {
 const ProductDetails = () => {
     const { productId } = useParams<ProductDetailsParams>();
     const { data: product, isLoading, isError } = useSingleProductQuery(productId);
-    console.log(product)
     const navigate = useNavigate();
 
     if (isLoading) {

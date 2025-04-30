@@ -1,0 +1,139 @@
+body {
+  overflow-x: hidden;
+  margin: 0;
+  padding: 0;
+}
+
+.app-footer {
+  background-color: #001529;
+  color: #ffffff;
+  padding: 40px 20px;
+  width: 100%;
+  margin-top: 60px;
+}
+
+.footer-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 16px;
+}
+
+.footer-title {
+  color: #ffffff;
+  margin-bottom: 12px;
+}
+
+.footer-text,
+.footer-links a,
+.footer-contact .ant-typography,
+.footer-copyright {
+  color: #ffffff !important;
+  font-size: 14px;
+  line-height: 1.6;
+}
+
+.footer-links a {
+  display: block;
+  margin-bottom: 8px;
+  transition: color 0.3s ease;
+  text-decoration: none;
+}
+
+.footer-links a:hover {
+  color: #40a9ff;
+}
+
+.footer-contact .ant-typography {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.footer-social button {
+  color: #ffffff;
+  font-size: 18px;
+  transition: color 0.3s ease;
+}
+
+.footer-social button:hover {
+  color: #1890ff;
+}
+
+.footer-divider {
+  border-color: #434343;
+  margin: 24px 0;
+}
+
+/* Responsive Styles */
+@media (max-width: 768px) {
+  .footer-container {
+    padding: 0 12px;
+  }
+
+  .footer-social {
+    margin-top: 16px;
+  }
+
+  .footer-divider {
+    margin: 16px 0;
+  }
+
+  .footer-text,
+  .footer-links a,
+  .footer-contact .ant-typography {
+    font-size: 13px;
+  }
+
+  .footer-title {
+    font-size: 16px;
+  }
+
+  .footer-social button {
+    font-size: 16px;
+  }
+
+  .footer-contact .ant-typography {
+    flex-wrap: wrap;
+  }
+
+  .footer-copyright {
+    display: block;
+    margin-top: 12px;
+    font-size: 13px;
+    text-align: center;
+  }
+}
+
+@media (max-width: 480px) {
+  .footer-text,
+  .footer-links a,
+  .footer-contact .ant-typography {
+    font-size: 12px;
+  }
+
+  .footer-title {
+    font-size: 15px;
+  }
+
+  .footer-social button {
+    font-size: 14px;
+  }
+
+  .footer-divider {
+    margin: 12px 0;
+  }
+
+  .footer-copyright {
+    font-size: 12px;
+    margin-top: 16px;
+  }
+}
+
+.footer-title {
+  color: #ffffff !important;
+  margin-bottom: 12px;
+}
+
+.white-text {
+  color: #ffffff !important;
+}

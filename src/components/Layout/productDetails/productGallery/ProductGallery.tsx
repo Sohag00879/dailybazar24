@@ -2,7 +2,7 @@ import { BarcodeOutlined } from '@ant-design/icons';
 import { Badge, Button, Col, Image } from 'antd';
 
 const ProductGallery = ({ product }) => {
-    const mainImage = product?.images?.[0] || 'https://via.placeholder.com/600x600?text=Product+Image';
+    const mainImage = product?.thumbnail || product?.images?.[0];
     const qrCode = product?.meta?.qrCode || '#';
     return (
         <Col xs={24} md={10}>

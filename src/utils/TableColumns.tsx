@@ -4,12 +4,12 @@ const { Text } = Typography;
 export const columns = [
   {
     title: "Image",
-    dataIndex: "images",
-    key: "images",
+    dataIndex: "thumbnail",
+    key: "thumbnail",
     responsive: ["xs", "sm"],
-    render: (images) => (
+    render: (thumbnail) => (
       <Image
-        src={images[0]}
+        src={thumbnail}
         alt="product"
         width={80}
         height={80}
