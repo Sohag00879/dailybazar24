@@ -13,7 +13,7 @@ const ProtectedRoute = ({ children }: ProtectedRouteProps) => {
     if (!isLoaded) return null;
 
     if (!isSignedIn) {
-        return <RedirectToSignIn redirectUrl={'https://dailybazaar24.netlify.app/'} />;
+        return <RedirectToSignIn redirectUrl={'/'} />;
     }
 
     return <>{children}</>;
