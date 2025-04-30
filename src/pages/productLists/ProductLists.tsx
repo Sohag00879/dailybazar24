@@ -21,9 +21,6 @@ const ProductLists = () => {
 
     const handleTableChange = (
         newPagination: TablePaginationConfig,
-        // filters: Record<string, FilterValue | null>,
-        // sorter: SorterResult<Product>,
-        // extra: TableCurrentDataSource<Product>
     ) => {
         setPagination({
             ...pagination,
