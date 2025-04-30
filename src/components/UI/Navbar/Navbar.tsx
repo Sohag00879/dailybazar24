@@ -36,7 +36,7 @@ const Navbar = () => {
             }}
         >
             <Link to="/">
-                <Text style={{ fontSize: 20, fontWeight: "bold" }}>DailyBazaar</Text>
+                <Text style={{ fontSize: 20, fontWeight: "bold" }}>DailyBazaar24</Text>
             </Link>
 
             <Space>

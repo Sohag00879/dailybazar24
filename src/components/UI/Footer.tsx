@@ -23,7 +23,7 @@ const AppFooter = () => {
             <div className="footer-container">
                 <Row gutter={[24, 24]} justify="space-between">
                     <Col xs={24} sm={12} md={6}>
-                        <Title level={5} className="footer-title">ShopEase</Title>
+                        <Title level={5} className="footer-title">Daily Bazaar24</Title>
                         <Text className="footer-text">
                             Your one-stop destination for all shopping needs. Quality products at affordable prices.
                         </Text>
@@ -64,9 +64,9 @@ const AppFooter = () => {
                         <Title level={5} className="footer-title">Contact Us</Title>
                         <div className="footer-contact">
                             <Space direction="vertical" size="small">
-                                <Text><EnvironmentOutlined /> 123 Main Street, City, Country</Text>
+                                <Text><EnvironmentOutlined /> 123 Main Street, Dhaka, Bangladesh</Text>
                                 <Text><PhoneOutlined /> +1 (234) 567-8900</Text>
-                                <Text><MailOutlined /> support@shopease.com</Text>
+                                <Text><MailOutlined /> support@DailyBazaar24.com</Text>
                             </Space>
                         </div>
                     </Col>
@@ -85,7 +85,7 @@ const AppFooter = () => {
                     </Col>
                     <Col xs={24} sm={12} md={6}>
                         <Text className="footer-copyright white-text">
-                            © {new Date().getFullYear()} ShopEase. All rights reserved.
+                            © {new Date().getFullYear()} DailyBazaar. All rights reserved.
                         </Text>
                     </Col>
                 </Row>
